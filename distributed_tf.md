@@ -166,7 +166,50 @@ PS模式根据worker间更新训练参数的方式分为同步和异步方式。
 
 ### 1.3  I/O  
 
+tf.data.Dataset
+Feeding
+QueueRunner
+Preloaded data   
+
+tf.data.TFRecordDataset(filename)
+
+
 ### 1.4 构建计算图  
+
+- tf.train.Saver()
+   保存和restore变量。   
+
+
+- tf.train.MonitoredTrainingSession   
+ 会配置保存summaries，checkpoint相关信息的参数；   
+ 会创建Scaffold对象，该对象会具有tf.train.Saver成员；   
+返回值是MonitoredSession对象。   
+
+```pyhton
+from tensorflow.python.training.monitored_session import MonitoredTrainingSession  
+with tf.train.MonitoredTrainingSession() as mts_sess:
+
+``` 
+-
+    * 不用显式调用saver.save()函数  
+      
+
+- mts_sess不能用作
+    * 不能设置为默认session.
+    * 不能传递给 saver.save.
+    * it cannot be sent to tf.train.start_queue_runners. 
+
+tf.train.MonitoredSession  
+
+
+tf.train.SessionRunHook  
+
+tf.train.Coordinator
+tf.train.QueueRunner
+
+tf.train.start_queue_runners
+
+
 
 ### 1.5 数据的管理  
 

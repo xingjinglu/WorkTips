@@ -14,7 +14,7 @@ Its functions seems like DS-5.
 The same tool as "gprof" for linux + x86 systems. There are user  
  docs, and I figured out how to use the tool on ARM A72 + Android.
 
- ### 5. simpleprof of android-ndk-r14b[1]  
+### 5. simpleprof of android-ndk-r14b[1]  
  It is the same tool like "perf" for linux, and it can collect info about cpu cycles, events and    
  program execution time.   
 
