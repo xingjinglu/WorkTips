@@ -24,6 +24,16 @@ Tesla P100 @ Training
 Memory: 16GB, 732GB/s; 12GB, 549GB/s
 APIS: CUDA, DirectCompute, OpenCL, OpenACC
 
+
+TitanXP
+3840Cores
+Memory: 12GB, 
+Memory Speed: 11.4Gbps, 
+Mmeory Band: 547.7GB/s
+SinglePrecision: 384-bit, 12TFlops
+
+GPU: Pascal Architecture,
+
 Tesla V100(SXM2) 
 Memory: 16GB
 L2: 6MB
@@ -32,5 +42,6 @@ Single Precision: 15TFlops
 Double Precision: 7.5TF
 TensorPerformace: 120TFlops, 4x4FP16 matrix, 
 GPU: Volta
+
 
 
