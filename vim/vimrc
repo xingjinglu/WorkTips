@@ -1,0 +1,57 @@
+
+" cscope related
+set nocscopeverbose  
+
+set mouse=ar
+set hlsearch
+colorscheme desert
+set smartindent
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set autoindent
+
+syntax on
+set hlsearch
+set showmatch
+
+
+
+let Tlist_Auto_Open = 1
+let Tlist_Auto_Update = 1
+
+set cscopetag
+set textwidth=80
+
+
+set nocompatible
+set t_Co=256
+
+set wildmenu
+set wildmode=longest:list,full
+
+set completeopt=longest,menu,preview
+set backspace=indent,eol,start
+
+set history=200
+
+set laststatus=2
+set showcmd
+set incsearch
+set splitright
+set splitbelow
+
+au FileType python set expandtab shiftwidth=4 tabstop=4
+nnoremap <buffer> H :<C-u>execute "!pydoc3 " . expand("<cword>")<CR>
+
+" OpenCL format.
+autocmd BufNewFile,BufRead *.cl set filetype=opencl
+autocmd FileType opencl source /search/speech/luxingjing/.vim/plugin/opencl.vim
+ 
+
+
+
+
+"NerdTree
+nmap <F2>:NERDTree <CR>
+ 
