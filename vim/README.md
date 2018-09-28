@@ -35,7 +35,7 @@ filetype plugin indent on
 
 ```
 # cd ~/.vim/bundle
-git clone git://github.com/majutsushi/tagbar
+git clone https://github.com/majutsushi/tagbar.git
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/powerline/powerline.git
 git clone https://github.com/fatih/vim-go.git
