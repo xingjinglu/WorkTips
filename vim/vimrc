@@ -48,12 +48,14 @@ nnoremap <buffer> H :<C-u>execute "!pydoc3 " . expand("<cword>")<CR>
 autocmd BufNewFile,BufRead *.cl set filetype=opencl
 autocmd FileType opencl source /search/speech/luxingjing/.vim/plugin/opencl.vim
  
-
-
-
-
 "NerdTree
-nmap <F2>:NERDTree <CR>
+nmap <F2> :NERDTree <CR>
+
+"TagbarToggle
+nnoremap <silent> <F7> :TagbarToggle<CR>
+let TagbarOpenAutoClose = 0
+let tagbar_autoclose = 1
+let tagbar_autoopen = 1
 
 "golang
 let g:tagbar_type_go = {
