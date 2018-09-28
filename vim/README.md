@@ -3,6 +3,7 @@
 该目录最好是用户私有目录，不然后面配置vim-go 比较麻烦
 export gopath=~/software/go_workspace
 export goroot=/usr/lib/golang # 默认安装目录
+export PATH=$PATH:$gopath/bin
 
 
 # 配置vim工具 with pathogen
@@ -58,6 +59,37 @@ go get -u github.com/mdempsky/gocode
 
 vim t
 ::GoInstallBinaries
+
+# cat .vimrc
+"golang                                                                                                                                             
+let g:tagbar_type_go = {                                                                                                                            
+  \ 'ctagstype' : 'go',
+  \ 'kinds'     : [
+    \ 'p:package', 
+    \ 'i:imports:1',
+    \ 'c:constants',
+    \ 'v:variables',
+    \ 't:types', 
+    \ 'n:interfaces',                                                                                                                               
+    \ 'w:fields',                                                                                                                                   
+    \ 'e:embedded',
+    \ 'm:methods',                                                                                                                                  
+    \ 'r:constructor',                                                                                                                              
+    \ 'f:functions'
+  \ ],
+  \ 'sro' : '.',
+  \ 'kind2scope' : {                                                                                                                                
+    \ 't' : 'ctype',                                                                                                                                
+    \ 'n' : 'ntype'
+  \ },
+  \ 'scope2kind' : {                                                                                                                                
+    \ 'ctype' : 't',
+    \ 'ntype' : 'n'                                                                                                                                 
+  \ },
+  \ 'ctagsbin'  : 'gotags',
+  \ 'ctagsargs' : '-sort -silent'
+\ }
+
 ```
 
 
