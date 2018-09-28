@@ -1,9 +1,11 @@
 
-- Install go
+- Install go  
+```
 该目录最好是用户私有目录，不然后面配置vim-go 比较麻烦
 export gopath=~/software/go_workspace
 export goroot=/usr/lib/golang # 默认安装目录
 export PATH=$PATH:$gopath/bin
+```
 
 
 # 配置vim工具 with pathogen
