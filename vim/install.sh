@@ -1,3 +1,5 @@
+set -xe
+
 export https_proxy=http://10.130.14.129:8080
 export http_proxy=http://10.130.14.129:8080
 
@@ -15,6 +17,12 @@ sudo ln /usr/local/bin/vim /usr/bin -s
 # Install pathogen  
 # ~/.vim/bundle是pathogen默认runtimepath，把所有的plugin放到该目录即可
 mkdir -p ~/.vim/autoload ~/.vim/bundle  && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+cat > ~/.vimrc <<EOF
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+EOF
 
 
 
@@ -35,14 +43,58 @@ git clone https://github.com/plasticboy/vim-markdown.git
 #vim t
 #:Helptags  # 自动生成所有plugin的文档
 
+cat >> ~/.bashrc <<EOF
+mkdir -p  ~/software/go_workspace
+export GOPATH=~/software/go_workspace
+export GOROOT=/usr/lib/golang # 默认安装目录
+export PATH=$PATH:$GOPATH/bin
+EOF
+
+
 
 # 配置vim-go,会自动从网上下载相应包
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone https://github.com/fatih/vim-go.git ~/.vim/plugged/vim-go
+
 go get -u github.com/jstemmer/gotags
 go get -u github.com/mdempsky/gocode
 
-#
+# Install go-package, need internet.
 #vim t
 #::GoInstallBinaries
+
+cat >> ~/.vimrc <<EOF
+"golang                                                                                                                                             
+let g:tagbar_type_go = {                                                                                                                            
+  \ 'ctagstype' : 'go',
+  \ 'kinds'     : [
+    \ 'p:package', 
+    \ 'i:imports:1',
+    \ 'c:constants',
+    \ 'v:variables',
+    \ 't:types', 
+    \ 'n:interfaces',                                                                                                                               
+    \ 'w:fields',                                                                                                                                   
+    \ 'e:embedded',
+    \ 'm:methods',                                                                                                                                  
+    \ 'r:constructor',                                                                                                                              
+    \ 'f:functions'
+  \ ],
+  \ 'sro' : '.',
+  \ 'kind2scope' : {                                                                                                                                
+    \ 't' : 'ctype',                                                                                                                                
+    \ 'n' : 'ntype'
+  \ },
+  \ 'scope2kind' : {                                                                                                                                
+    \ 'ctype' : 't',
+    \ 'ntype' : 'n'                                                                                                                                 
+  \ },
+  \ 'ctagsbin'  : 'gotags',
+  \ 'ctagsargs' : '-sort -silent'
+\ }
+EOF
+
+
 
 
 
