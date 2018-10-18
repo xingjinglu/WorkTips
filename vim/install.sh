@@ -8,6 +8,9 @@ unzip master.zip
 cd vim-master/src/
 ./configure && make -j64 && make install
 
+sudo mv /usr/bin/vim /usr/bin/vim.bak
+sudo ln /usr/local/bin/vim /usr/bin -s
+
 
 # Install pathogen  
 # ~/.vim/bundle是pathogen默认runtimepath，把所有的plugin放到该目录即可
@@ -31,8 +34,6 @@ git clone https://github.com/plasticboy/vim-markdown.git
 # Generate help docs
 #vim t
 #:Helptags  # 自动生成所有plugin的文档
-
-
 
 
 # 配置vim-go,会自动从网上下载相应包

@@ -60,8 +60,9 @@ vim t
 go get -u github.com/jstemmer/gotags
 go get -u github.com/mdempsky/gocode
 
+# 该命令会自动安装很多包，需要连接网络
 vim t
-::GoInstallBinaries
+:GoInstallBinaries
 
 # cat .vimrc
 "golang                                                                                                                                             
