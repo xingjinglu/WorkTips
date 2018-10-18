@@ -114,5 +114,6 @@ let g:tagbar_type_go = {
 ```
 
 
-
+ref  
+https://github.com/tpope/vim-pathogen   
 
