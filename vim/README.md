@@ -1,5 +1,5 @@
 
-- Install go  
+### Install go  
 ```
 该目录最好是用户私有目录，不然后面配置vim-go 比较麻烦
 export GOPATH=/absolute-path/software/go_workspace
@@ -9,7 +9,7 @@ export PATH=$PATH:$GOPATH/bin
 ```
 
 
-# 配置vim工具 with pathogen
+### 配置vim工具 with pathogen
 
 - update vim  
 
@@ -113,6 +113,10 @@ let g:tagbar_type_go = {
 
 ```
 
+### 鼠标
+
+xshell TERM选择xterm
+ctrl + 滚轮即可
 
 ref  
 https://github.com/tpope/vim-pathogen   
