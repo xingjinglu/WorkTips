@@ -49,6 +49,8 @@ git clone https://github.com/sjl/gundo.vim
 git clone https://github.com/Blackrush/vim-gocode.git
 git clone https://github.com/plasticboy/vim-markdown.git
 
+
+
 # Generate help docs
 vim t
 :Helptags  # 自动生成所有plugin的文档
@@ -57,6 +59,21 @@ vim t
 
 - 配置vim-go,会自动从网上下载相应包
 ```
+# step 1
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone https://github.com/fatih/vim-go.git ~/.vim/plugged/vim-go
+
+# step 2 install 
+vim t
+:GoInstallBinaries
+
+# 或者
+vim ~/.vimrc
+call plug#begin()
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+call plug#end()
+
+
 go get -u github.com/jstemmer/gotags
 go get -u github.com/mdempsky/gocode
 
