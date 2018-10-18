@@ -20,6 +20,36 @@ sudo ln /usr/local/bin/vim /usr/bin -s
 # ~/.vim/bundle是pathogen默认runtimepath，把所有的plugin放到该目录即可
 mkdir -p ~/.vim/autoload ~/.vim/bundle  && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
+
+# Install vim-plugin  
+git clone https://github.com/majutsushi/tagbar.git   ~/.vim/bundle/tagbar
+git clone https://github.com/scrooloose/nerdtree.git  ~/.vim/bundle/nerdtree
+git clone https://github.com/powerline/powerline.git ~/.vim/bundle/powerline
+git clone https://github.com/fatih/vim-go.git  ~/.vim/bundle/vim-go
+git clone https://github.com/tpope/vim-sensible.git ~/.vim/vim-sensible
+git clone https://github.com/Shougo/neocomplete.vim.git ~/.vim/neocomplete.vim
+git clone https://github.com/sjl/gundo.vim  ~/.vim/gundo.vim
+git clone https://github.com/Blackrush/vim-gocode.git  ~/.vim/vim-gocode
+git clone https://github.com/plasticboy/vim-markdown.git ~/.vim/vim-markdown
+
+
+mkdir -p  ~/software/go_workspace
+cat >> ~/.bashrc <<EOF
+export GOPATH=/search/odin/xxx/software/go_workspace
+export GOROOT=/usr/lib/golang # 默认安装目录
+export PATH=$PATH:$GOPATH/bin
+EOF
+source ~/.bashrc
+
+
+
+# 配置vim-go,会自动从网上下载相应包
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone https://github.com/fatih/vim-go.git ~/.vim/plugged/vim-go
+
+go get -u github.com/jstemmer/gotags
+go get -u github.com/mdempsky/gocode
+
 mv ~/.vimrc ~/.vimrc.bak
 cat >  ~/.vimrc <<EOF
 execute pathogen#infect()
@@ -83,48 +113,6 @@ let TagbarOpenAutoClose = 0
 let tagbar_autoclose = 0
 let tagbar_autoopen = 1
 
-EOF
-
-
-
-# Install vim-plugin  
-
-cd ~/.vim/bundle
-git clone https://github.com/majutsushi/tagbar.git
-git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/powerline/powerline.git
-git clone https://github.com/fatih/vim-go.git
-git clone https://github.com/tpope/vim-sensible.git
-git clone https://github.com/Shougo/neocomplete.vim.git
-git clone https://github.com/sjl/gundo.vim
-git clone https://github.com/Blackrush/vim-gocode.git
-git clone https://github.com/plasticboy/vim-markdown.git
-
-# Generate help docs
-#vim t
-#:Helptags  # 自动生成所有plugin的文档
-
-cat >> ~/.bashrc <<EOF
-mkdir -p  ~/software/go_workspace
-export GOPATH=~/software/go_workspace
-export GOROOT=/usr/lib/golang # 默认安装目录
-export PATH=$PATH:$GOPATH/bin
-EOF
-
-
-
-# 配置vim-go,会自动从网上下载相应包
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-git clone https://github.com/fatih/vim-go.git ~/.vim/plugged/vim-go
-
-go get -u github.com/jstemmer/gotags
-go get -u github.com/mdempsky/gocode
-
-# Install go-package, need internet.
-#vim t
-#::GoInstallBinaries
-
-cat >> ~/.vimrc <<EOF
 "golang                                                                                                                                             
 let g:tagbar_type_go = {                                                                                                                            
   \ 'ctagstype' : 'go',
@@ -158,6 +146,12 @@ EOF
 
 
 # Install other stuffs.
+
+
+# Generate help docs
+#vim t
+#:Helptags  # 自动生成所有plugin的文档
+
 pushd ~/.vim/bundle
 echo "vim t"
 echo ":GoInstallBinaries"
