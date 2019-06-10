@@ -120,4 +120,4 @@ ctrl + 滚轮即可
 
 ref  
 https://github.com/tpope/vim-pathogen   
-
+https://github.com/fatih/vim-go   
