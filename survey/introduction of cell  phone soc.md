@@ -53,31 +53,51 @@ Security---WiFi/Location
 
     
 
-  - Apple A13 SoC 201909
+  - Apple A13 SoC 201909[4]
 
     ```mermaid
     graph LR
     
-    MaliG76---Balong_Modem
-    NPU_DaVinci---ISP5.0 
-    HiFiAudio---CPU_Lightning_Thunder
+    Metal_Optimized_GPU---Audio-subsystem
+    Neural-Engine---HDR_Video_Image
+    Cameral-fusion---CPU_Lightning_Thunder
     
     
     ```
 
+    苹果A13 Bionic芯片整体有8.5 billion个晶体管，由TSMC代工，采用的工艺为2nd代N7。
     
+    - CPU：ARMv8.3-A指令集，采用达大小核异构（2*ligntning+4*thunder），大核主频为2.65GHz，相对于上一代CPU核性能提升20%同时功耗下降30%，4个效率核性能提升20%同时功耗下降40%。 
+    - GPU：苹果自己设计的4核GPU，性能提升20%，功耗下降40%。
+    - NPU：8-core Neural engine，性能提升20%，功耗下降15%，这里的NPU实际上包括AMXblocks，后者是双核，苹果宣称AMX blocks在MM上的性能是A12上的Vortex Core的6倍，AMX的性能达到1Tops。
+    - AMX：也可以称之为矩阵协处理器，具体细节待查明。
+    - 图像处理相关：ISP，Depth engine，HEVC encoder/decoder，video processor
+    
+- 小结
+
+  上面提到的3个智能手机SoC平台是比较典型解决方案，当然，除此之外，还有其他厂商提供了类似方案，包括：三星，联发科，展讯（紫光展锐）等。手机厂商虽然有很多家，但是能够提供SoC解决方案的只有上述几家，苹果、三星和华为的SoC主要是为自家厂商提供解决方案，高通提供了从低端到高端的所有解决方案，联发科目前只能提供中低端的解决方案，紫光展锐提供中低端解决方案（？不太确定）。
+
+  | processor | 编程方法 | 计算力 | 计算功耗 |
+  | --------- | -------- | ------ | -------- |
+  | CPU       |          |        |          |
+  | GPU       |          |        |          |
+  | NPU       |          |        |          |
+
+  
+
+  
 
 ## 1.2 NPU加速器
 
-| Company   | Solution | Features |
-| --------- | -------- | -------- |
-| Qualcomm  |          |          |
-| ARM       |          |          |
-| Samsung   |          |          |
-| Huawei    |          |          |
-| Apple     |          |          |
-| Cambricon |          |          |
-| 瑞芯微    |          |          |
+| Company   | Solution         | Features |
+| --------- | ---------------- | -------- |
+| Qualcomm  | Hexgon DSP       |          |
+| ARM       |                  |          |
+| Samsung   |                  |          |
+| Huawei    | Da vinci         |          |
+| Apple     | NPU              |          |
+| Cambricon | 手机端提供IP授权 |          |
+| 瑞芯微    | NPU              |          |
 
 
 
@@ -107,4 +127,4 @@ Qualcomm® Math Library（QML）
 [2] https://developer.qualcomm.com/software/hexagon-dsp-sdk/dsp-processor
 [3] http://www.aadhu.com/how-qualcomm-improved-performance-gaming-and-ai-on-the-snapdragon-855/
 
-[4]
+[4] https://en.wikipedia.org/wiki/Apple_A13 
