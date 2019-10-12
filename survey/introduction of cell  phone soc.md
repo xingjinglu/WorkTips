@@ -99,37 +99,100 @@ Security---WiFi/Location
 
 ### 1.2.1  ARM指令集版本介绍
 
-​     现在常用的ARM指令集从支持的指令字长度来划分主要包括32bit和64bit，前者是指ARMv7指令集，后者是指ARMv8指令集。ARMv8指令集又分为ARMv8.1-A， ARMv8.2-A，ARMv8.3-A等版本
+​     现在常用的ARM指令集从支持的指令字长度来划分主要包括32bit和64bit，前者是指ARMv7指令集（A32），后者是指ARMv8指令集，64-bit的ARMv8-A也称之为AArch64，ARMv8-A也会在用户层兼容ARMv7-A（32-bit指令集），这时后者被称之为AArch32，。ARMv8指令集又分为ARMv8.1-A， ARMv8.2-A，ARMv8.3-A，ARMv8.4-A等版本。
+
+​	ARM在未来的架构中会引入SVE2（Scalable Vector Extension2）和TME（Transational Memory Extension），clang9.0和GCC10已经在开发支持代码。
+
+​	ARMv8.0-A是一个大的指令升级，所以详细介绍一下相对之前指令集的变化：
+
+- 32个通用64-bit寄存器
+- PC寄存器不能直接访问
+- 指令是32bit长，并且多数指令仍然采用32bit和64bit参数
+- Advanced SIMD（NEON）加强
+  - 32x 128-bit 寄存器
+  - 完全支持IEEE754
 
 | version   | date    | feature                                                      |
 | --------- | ------- | ------------------------------------------------------------ |
 | ARMv7     |         |                                                              |
-| ARMv8.0-a | 2011.10 | 指令集从32bit扩展到64bit                                     |
-| ARMv8.1-a | 2014.12 | 1. 扩展乘加指令（标量和向量）；2. load/store指令             |
-| ARMv8.2-a | 2016.01 | 1.支持half类型计算； 2. 对int8乘法有更好支持；3. SVE扩展，服务器 |
-| ARMv8.3-a | 2016.10 | 1. simd 复数支持；2.一致性；3. 支持更大片上cache             |
-| ARMv8.4-a | 2017    | 1. 加密、安全； 2. 虚拟化支持； 3. dot product指令           |
-| ARMv8.5-a | 2018    | 1. MTE和BTI；2.真随机数生成                                  |
+| ARMv8.0-a | 2011.10 | 指令集从32bit扩展到64bit；1. 32个通用64-bit寄存器；2. pc不能访问；3. 指令仍然是32bit的；4. 地址默认为64-bit； |
+| ARMv8.1-a | 2014.12 | 1. 扩展乘加指令（标量和向量）；2. load/store指令；3.read-write原子操作； |
+| ARMv8.2-a | 2016.01 | 1.支持half类型计算； 2. 对int8乘法有更好支持；3. SVE扩展，向量操作扩展到128-2048bit，服务器，该扩展在2019年已经被GCC8和clang支持。 |
+| ARMv8.3-a | 2016.10 | 1. simd 复数支持；2.支持弱一致性；3. 支持更大片上cache       |
+| ARMv8.4-a | 2017    | 1. 加密、安全； 2. 虚拟化支持； 3. dot product指令（SDOT，UDOT）；4. 支持FP16的乘法，加减指令 |
+| ARMv8.5-a | 2018    | 1. MTE（Memory Tagging Extension）和BTI（branch target indications)；2.真随机数生成 |
+| ARMv8.6-A | 201909  | 1. 增加通用GEMM; 2. 支持Bfloat16 format，增强虚拟化、系统管理和安全；3. 引入新的SIMD matrix manipulation instructions（BFDOT，BFMMLA, BFMLAL, BFCVT） |
+|           |         |                                                              |
 
 
+
+#### 指令扩展解释
+
+- dot计算指令 [5]
+
+ARMv8.4-A中的dot计算指令能够加速深度学习应用算法，该指令扩展是可选的，在A55和A75处理器中支持该指令。
+
+```bash
+uchar a[N], b[N];
+uint sum = 0;
+for(int i = 0; i < N; i++){
+	sum += a[i] * b[i];
+}
+```
+
+- bfloat16 (Brain Floating Point) float-point format[6,7]
+
+  16bit的float数，用来加速机器学习和near-sensor计算，精度与float一致，指数部分为8bit，但是只支持8bit精度，而不是fp32bit中的24bit（AI处理器中多支持该操作，包括Nervana，TPU）。
+
+```bash
+# bf16
+sign bit: 1
+exponent width: 8 bits
+significand precision: 7-bits
+
+# IEEEf16
+sign bit: 1
+exponent width: 5 bits
+significand precision: 10bits
+
+# IEEE f32
+sign bit: 1
+exponent width: 8 bits
+significand precision: 23bits 
+```
+
+- BFDOT, BFMMLA, BMLAL, BFCVT[6,7]
+
+  通用矩阵运算指令，操作数是bf16，累加数是float32, ARM的该指令集扩展，相当于是在CPU中增加对深度学习场景的支持，这种支持不能改变ARM处理器仍然是通用处理器，应该无法替代专用的AI加速器。
+
+```bash
+# BFDOT [1x2] x [2x1]
+IEEE32 += BF16 * BF16
+# BFMMLA [2x4] x [4x2] // 相当于将两个BFDOT指令合并到一起
+IEEE32[2x2] += BF16[2x4] * BF16[4x2]
+# BFMLAL 支持奇数和偶数的BF16元素
+# BFCVT 将IEEEFP32转换成BF16
+
+
+```
 
 ### 1.2.2 ARM CPU  
 
-​     ARM的处理器又被称之为公版处理器，可以以IP授权的形式授权给第三方，ARM的公版处理器一般是最早启用新的指令集，最近苹果的A处理器在这方面超过了ARM的公版处理器。
+​     ARM的处理器又被称之为公版处理器，通常以IP授权的形式授权给第三方，ARM的公版处理器一般是最早启用新的指令集，最近苹果的A处理器在这方面超过了ARM的公版处理器。
 
    从2011年开始（TBD），手机平台开始引入大小核异构架构。
 
 | CPU  | ISA Version | Features | Date    |
 | ---- | ----------- | -------- | ------- |
-|      |             |          |         |
-| A53  | ARMv8-a     |          | 2012.10 |
-| A57  | ARMv8-a     |          | 2012.10 |
-| A72  |             |          |         |
-| A73  |             |          |         |
-| A55  |             |          |         |
-| A75  |             |          |         |
-| A76  |             |          |         |
-| A77  |             |          |         |
+| A32  | ARMv8-A     | 32bit    |         |
+| A53  | ARMv8-A     |          | 2012.10 |
+| A57  | ARMv8-A     |          | 2012.10 |
+| A72  | ARMv8-A     |          |         |
+| A73  | ARMv8-A     |          |         |
+| A55  | ARMv8.2-A   |          |         |
+| A75  | ARMv8.2-A   |          |         |
+| A76  | ARMv8.2-A   |          |         |
+| A77  | ARMv8.2-A   |          |         |
 
 
 
@@ -198,3 +261,9 @@ Qualcomm® Math Library（QML）
 [3] http://www.aadhu.com/how-qualcomm-improved-performance-gaming-and-ai-on-the-snapdragon-855/
 
 [4] https://en.wikipedia.org/wiki/Apple_A13 
+
+[5] https://community.arm.com/developer/tools-software/tools/b/tools-software-ides-blog/posts/exploring-the-arm-dot-product-instructions
+
+ [6] https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
+
+[7] https://community.arm.com/developer/ip-products/processors/b/ml-ip-blog/posts/bfloat16-processing-for-neural-networks-on-armv8_2d00_a  
