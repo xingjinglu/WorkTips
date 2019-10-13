@@ -86,7 +86,7 @@ Security---WiFi/Location
   
   
 
-  ​Tabel 1. 主要计算资源介绍       
+  Tabel 1. 主要计算资源介绍       
 
 
 
@@ -310,12 +310,13 @@ IEEE32[2x2] += BF16[2x4] * BF16[4x2]
 
 # 2.  开发环境   
 
-- Qualcomm
+## Qualcomm
 
 支持AI的芯片有855, 845, 835, 821, 820 and 660
 AI开发环境  
 
-- Qualcomm® Neural Processing SDK  
+- ### Qualcomm® Neural Processing SDK  
+  
   支持主要的计算部件，支持TF，pytorch和caffe等编程框架，定义了自己的模型格式DLC，只支持卷积（？）；
 
 Google’s Android NN-API
