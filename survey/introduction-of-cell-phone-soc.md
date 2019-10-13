@@ -290,12 +290,6 @@ IEEE32[2x2] += BF16[2x4] * BF16[4x2]
 
 
 
-`
-
-[TOC]
-
-`
-
 ## 1.3 GPU
 
 
@@ -355,5 +349,3 @@ Qualcomm® Math Library（QML）
 [12]  https://en.wikipedia.org/wiki/Krait_(CPU) 
 
 [13]  https://en.wikipedia.org/wiki/Kryo 
-
-[^8]: 
