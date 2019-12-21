@@ -1,7 +1,11 @@
+[TOC]
+
 ## ncnn [1]
+
 ### 1. build: [1]   
   It works as the instruction in [1].
   Make sure the version android-ndk is r15c.
+
   ```
   $cmake -DCMAKE_TOOLCHAIN_FILE=/search/speech/luxingjing/software/android-ndk-r15c/build/cmake/android.toolchain.cmake  -DANDROID_ABI="arm64-v8a" -DANDROID_ARM_NEON=ON     -DANDROID_PLATFORM=android-14 ..
 
@@ -11,6 +15,24 @@
 
   ```
 
+- build tools
+
+  - protobuf：版本太新不行，例如3.1.1,目前测试可以的版本的是2.6.1
+
+  - 需要修改tools/caffe/CMakeLists.txt 和/tools/onnx/CMakeLists.txt文件，添加对应的protobuf路径   
+
+    ```bash
+    # caffe/CMakeLists.txt
+    set(Protobuf_INCLUDE_DIR "/usr/local/protobuf261/include")
+    set(Protobuf_LIBRARY "/usr/local/protobuf261/lib")
+    link_directories("/usr/local/protobuf261/lib")
+    
+    target_link_libraries(caffe2ncnn  PRIVATE protobuf)
+    # onnx/CMakeLists.txt 
+    添加相同配置信息
+    ```
+
+    
 
 ### 2. Run Squeezenet with ncnn [6] 
 
@@ -103,27 +125,27 @@ It failed now.
    Setup at the peak performance for each core.
    A53: 1.415GHz
    A72: 1.8GHz
-  
+
 - 1. benchncnn 8 1 0  @ A72      
 
 
-|    squeezenet  |min =  176.65 |max =  186.99 |avg =  179.97|   
+|    squeezenet  |min =  176.65 |max =  186.99 |avg =  179.97|
 |--|--|--|--|
-|      mobilenet |min =  297.26 |max =  319.95 |avg =  311.13|  
-|   mobilenet_v2 |min =  367.38 |max =  401.66 |avg =  382.13|  
-|     shufflenet |min =   99.13 |max =  102.18 |avg =   99.99|  
-|      googlenet |min =  571.57 |max =  596.20 |avg =  586.63|  
-|       resnet18 |min =  888.14 |max = 1059.80 |avg =  929.63|  
-|        alexnet |min =  529.83 |max =  541.63 |avg =  532.81|  
-|          vgg16 |min = 2594.72 |max = 2961.71 |avg = 2805.33|  
-| squeezenet-ssd |min =  274.25 |max =  321.47 |avg =  306.92|  
-|  mobilenet-ssd |min =  253.50 |max =  317.98 |avg =  291.48|  
+|      mobilenet |min =  297.26 |max =  319.95 |avg =  311.13|
+|   mobilenet_v2 |min =  367.38 |max =  401.66 |avg =  382.13|
+|     shufflenet |min =   99.13 |max =  102.18 |avg =   99.99|
+|      googlenet |min =  571.57 |max =  596.20 |avg =  586.63|
+|       resnet18 |min =  888.14 |max = 1059.80 |avg =  929.63|
+|        alexnet |min =  529.83 |max =  541.63 |avg =  532.81|
+|          vgg16 |min = 2594.72 |max = 2961.71 |avg = 2805.33|
+| squeezenet-ssd |min =  274.25 |max =  321.47 |avg =  306.92|
+|  mobilenet-ssd |min =  253.50 |max =  317.98 |avg =  291.48|
 
 
 
 - 2. benchncnn 8 2 0  @ A72   
 
-|     squeezenet |min =   80.69 |max =  118.43 |avg =   97.37| 
+|     squeezenet |min =   80.69 |max =  118.43 |avg =   97.37|
 |--|--|--|--|
 |      mobilenet |min =  166.73 |max =  245.18 |avg =  200.62|
 |   mobilenet_v2 |min =  174.31 |max =  196.35 |avg =  180.34|
@@ -138,7 +160,7 @@ It failed now.
 
 - 3. benchncnn 8 4 0   
 
-|     squeezenet |min =  153.16 |max =  170.70 |avg =  157.52| 
+|     squeezenet |min =  153.16 |max =  170.70 |avg =  157.52|
 |--|--|--|--|
 |      mobilenet |min =  170.58 |max =  389.48 |avg =  257.77|
 |      shufflenet| min =   97.06| max =  305.98|avg =  123.94|
@@ -151,7 +173,7 @@ It failed now.
 
 - 4. ./benchncnn 8 1 0 @ A53  
 
-|    squeezenet | min =  389.93 |max =  400.36 |avg =  395.01| 
+|    squeezenet | min =  389.93 |max =  400.36 |avg =  395.01|
 |--|--|--|--|
 |      mobilenet| min =  594.31 |max =  609.08 |avg =  598.93|
 |   mobilenet_v2| min =  636.34 |max =  646.07 |avg =  642.80|
@@ -166,32 +188,32 @@ It failed now.
 
 - 5. ./benchncnn 8 2 0 @ A53  
 
-|     squeezenet |min =  232.41 |max =  243.20 |avg =  237.88| 
+|     squeezenet |min =  232.41 |max =  243.20 |avg =  237.88|
 |--|--|--|--|
-|   mobilenet_v2 |min =  242.76 |max =  437.25 |avg =  394.59| 
-|     shufflenet |min =   86.16 |max =   88.54 |avg =   87.02| 
-|      googlenet |min =  710.59 |max =  718.99 |avg =  715.46| 
-|       resnet18 |min = 1152.49 |max = 1168.78 |avg = 1158.13| 
-|        alexnet |min =  828.41 |max =  845.38 |avg =  833.22| 
-|          vgg16 |min = 3668.70 |max = 4675.28 |avg = 4143.42| 
-| squeezenet-ssd |min =  490.62 |max =  499.39 |avg =  495.11| 
+|   mobilenet_v2 |min =  242.76 |max =  437.25 |avg =  394.59|
+|     shufflenet |min =   86.16 |max =   88.54 |avg =   87.02|
+|      googlenet |min =  710.59 |max =  718.99 |avg =  715.46|
+|       resnet18 |min = 1152.49 |max = 1168.78 |avg = 1158.13|
+|        alexnet |min =  828.41 |max =  845.38 |avg =  833.22|
+|          vgg16 |min = 3668.70 |max = 4675.28 |avg = 4143.42|
+| squeezenet-ssd |min =  490.62 |max =  499.39 |avg =  495.11|
 
 
 
 
 - 6. ./benchncnn 8 4 0 @ A53  
 
-|squeezenet|  min =  128.97| max =  139.76|   avg =  132.71|  
+|squeezenet|  min =  128.97| max =  139.76|   avg =  132.71|
 |--|--|--|--|
-|  mobilenet| min =  193.60|  max =  235.33|  avg =  207.23|  
-| mobilenet_v2|min =  178.05|  max =  218.81  | avg =  196.90| 
-|   shufflenet| min =   72.84|  max =   76.11 | avg =   73.94| 
-|    googlenet|  min =  354.38|  max =  387.24| avg =  363.56| 
-|     resnet18|  min =  487.47|  max =  548.42| avg =  513.95| 
-|      alexnet|  min =  392.68|  max =  419.04| avg =  398.83| 
-|        vgg16|  min = 1966.30|  max = 2145.15| avg = 2038.04| 
-|squeezenet-ssd|  min =  190.68|  max =  208.47| avg =  200.53| 
-| mobilenet-ssd|  min =  206.74|  max =  241.38| avg =  225.03| 
+|  mobilenet| min =  193.60|  max =  235.33|  avg =  207.23|
+| mobilenet_v2|min =  178.05|  max =  218.81  | avg =  196.90|
+|   shufflenet| min =   72.84|  max =   76.11 | avg =   73.94|
+|    googlenet|  min =  354.38|  max =  387.24| avg =  363.56|
+|     resnet18|  min =  487.47|  max =  548.42| avg =  513.95|
+|      alexnet|  min =  392.68|  max =  419.04| avg =  398.83|
+|        vgg16|  min = 1966.30|  max = 2145.15| avg = 2038.04|
+|squeezenet-ssd|  min =  190.68|  max =  208.47| avg =  200.53|
+| mobilenet-ssd|  min =  206.74|  max =  241.38| avg =  225.03|
 
 
 
@@ -201,3 +223,5 @@ It failed now.
 
 
 
+
+>>>>>>> 37fd569d54de71769cd779a45fe7519aefcddc3e
