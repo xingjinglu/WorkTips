@@ -8,4 +8,6 @@
 #include<typeinfo>
 #include<cxxabi.h>
 
+#include<map>
+
 #endif
