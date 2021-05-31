@@ -1,5 +1,6 @@
 float cmult(int a, float b)
 {
-
-  r
+  float sum = 0.0;
+  sum = a + b;
+  return sum;
 }
