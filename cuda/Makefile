@@ -333,5 +333,6 @@ run: build
 clean:
 	rm -f gemm_wmma gemm_wmma.o test_gemm_wmma.o *.o gemm_persis
 	rm -rf ./bin
+	rm *.cubin *.fatbin *.module_id *.fatbin.* *.cudafe1.* *.ii *.ptx
 
 clobber: clean
