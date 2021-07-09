@@ -7,4 +7,4 @@ class Bottles:
 
 bottles = Bottles(42)
 print(bottles)
-print(b"%d bottles of beer\n", bottles)
+print("%d bottles of beer\n", bottles)

@@ -19,3 +19,15 @@ float add_float(float a, float b)
   return sum;
 }
 
+
+float vec_add_float(float *a, float *b, float *c, int num)
+{
+
+  int i = 0;
+  for(i = 0; i < num; i++){
+    c[i] = a[i] + b[i];
+  }
+
+  return 0.0;
+}
+
