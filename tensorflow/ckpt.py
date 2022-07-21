@@ -1,3 +1,5 @@
+import tempfile
+import os
 import tensorflow as tf
 
 class Net(tf.keras.Model):
@@ -42,7 +44,10 @@ dataset = toy_dataset()
 iterator = iter(dataset)
 ckpt = tf.train.Checkpoint(step=tf.Variable(1), optimizer=opt, net=net,
         iterator=iterator)
-manager = tf.train.CheckpointManager(ckpt, './tf_ckpts', max_to_keep=3)
+tmpdir = tempfile.mkdtemp()
+ckpt_path = os.path.join(tmpdir, "tf_ckpts/")
+print("ckpt_path: %s " % ckpt_path)
+manager = tf.train.CheckpointManager(ckpt, ckpt_path, max_to_keep=3)
 
 def train_and_checkpoint(net, manager):
     ckpt.restore(manager.latest_checkpoint)

@@ -40,10 +40,14 @@ print("saved_model_path: ", mobilenet_save_path)
 tf.saved_model.save(pretrained_model, mobilenet_save_path)
 
 loaded = tf.saved_model.load(mobilenet_save_path)
-print(list(loaded.signatures.keys()))
-
 infer = loaded.signatures["serving_default"]
 print(infer.structured_outputs)
+print(list(loaded.signatures.keys()))
+
+keras_model_path=os.path.join(tmpdir, "mobilenet/2/")
+tf.keras.models.save_model(pretrained_model, keras_model_path)
+keras_loaded = tf.keras.models.load_model(keras_model_path)
+keras_loaded.summary()
 
 
 # inference.
