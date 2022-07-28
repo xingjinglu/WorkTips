@@ -1,3 +1,3 @@
-#include "Singleton.h"
+#include "singleton.h"
 
 Singleton* Singleton::instance_ = new Singleton();
