@@ -1,6 +1,7 @@
 #include "override.h"
 #include <iostream>
 
+double Circle::pi_ = 3.14;
 
 int main()
 {
@@ -17,6 +18,13 @@ int main()
   Rect &rt2 = tr;
   float area3 = rt2.getArea(); 
   std::cout<<"rt2.area: " << area3 << std::endl;
+
+  //
+//Circle::pi = 3.14;
+Circle c(10);
+double area4 = c.getArea();
+std::cout<<"Circle.area: " << area4 << std::endl;
+
 
 
   return 0;
