@@ -1,6 +1,8 @@
 #ifndef SINGLETON_H_
 #define SINGLETON_H_
 
+#include<iostream>
+
 class Singleton {
  public:
     static Singleton* GetInstance() {
@@ -8,7 +10,7 @@ class Singleton {
     }
 
  private:
-    Singleton() {}
+    Singleton() {std::cout<<"hello\n";}
     static Singleton* instance_;
 };
 
