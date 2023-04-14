@@ -1,0 +1,395 @@
+cscope 15 $HOME/project/WorkTips/Learn-Python3-the-hardway               0000002225
+	@ex1.py
+
+1 
+´št
+("hello world!")
+
+2 
+´št
+("hello‡gain")
+
+3 
+´št
+("I†ikeypinghis.")
+
+4 
+´št
+("This is fun.")
+
+5 
+´št
+('Yay!, Printing.')
+
+6 
+´št
+("I'd much„ather you 'not'.")
+
+7 
+´št
+('I "said" do‚otouchhis.')
+
+	@ex2.py
+
+1 
+´št
+("I could havcodlikthis."è#ªd 
+‹h
+ 
+comm’t
+ 
+aá”
+ 
+is
+ 
+	gšgÜed
+.
+
+3 #You 
+ÿn
+ 
+®so
+ 
+u£
+ 
+a
+ 
+comm’t
+ 
+to
+ "di§bË" 
+Ü
+ comm’ˆ
+out
+ 
+code
+:
+
+5 
+´št
+("This will„un.")
+
+	@ex3.py
+
+1 
+´št
+("I will‚ow count my chickens:")
+
+3 
+´št
+("Hens", 25 + 30 / 6) #30
+
+4 
+´št
+("Roosters", 100 - 25 * 3 % 4) #97
+
+6 
+´št
+("Now I will countƒggs:")
+
+7 
+´št
+(3 + 2 + 1 - 5 + 4 % 2 - 1 / 4 + 6) #6.75
+
+9 
+´št
+("Is itruehat 3 + 2 < 5 - 7?")
+
+10 
+´št
+(3 + 2 < 5 - 7)
+
+12 
+´št
+("What is 3 + 2?", 3 + 2)
+
+13 
+´št
+("what is 5 - 7", 5 - 7)
+
+15 
+´št
+("on,hat is why it's False.")
+
+17 
+´št
+("How‡bout some more.")
+
+19 
+´št
+("Is it greater?", 5 > -2)
+
+20 
+´št
+("Is it greater?", 5 >= -2 )
+
+21 
+´št
+("Is it†ess orƒqual?", 5 <= -2)
+
+	@ex4.py
+
+1 
+	gÿrs
+ = 100
+
+2 
+¥aû_š_a_ÿr
+ = 4.0
+
+3 
+driv”s
+ = 30
+
+4 
+·s£ng”s
+ = 90
+
+5 
+ÿrs_nÙ_driv’
+ = 
+driv”s
+
+
+6 
+ÿrs_driv’
+ = 
+driv”s
+
+
+7 
+ÿ½oŞ_ÿ·c™y
+ = 
+ÿrs_driv’
+ * 
+¥aû_š_a_ÿr
+
+
+8 
+av”age_·s£ng”s_³r_ÿr
+ = 
+·s£ng”s
+ / 
+ÿrs_driv’
+
+
+10 
+´št
+("Th”¬e", 
+ÿrs
+, "cars‡vailable.")
+
+11 
+´št
+("Th”¬Úly", 
+driv”s
+, "drivers‡vailable")
+
+12 
+´št
+("Th”wÈbe", 
+ÿrs_nÙ_driv’
+, "empty carsoday")
+
+13 
+´št
+("WÿÀŒª¥Üt", 
+ÿ½oŞ_ÿ·c™y
+, "peopleoday.")
+
+14 
+´št
+("Whave", 
+·s£ng”s
+, "to carpooloday.")
+
+15 
+´št
+("WÃedØpuˆabout", 
+av”age_·s£ng”s_³r_ÿr
+,
+
+	@numpy_ex3.py
+
+1 
+impÜt
+ 
+numpy
+ 
+as
+ 
+	gÅ
+
+
+3 #
+Òp.štc)
+
+5 
+	$´št
+(
+Å
+.)
+
+8 #
+ =‚p.¬¿y([1, 2, 3], dty³='æßt')
+
+10 
+	$´št
+(
+a
+)
+
+12 
+b
+ = 
+Å
+.
+	$¬¿y
+([1.2, 2.4, 3.6])
+
+13 
+	$´št
+(
+b
+)
+
+14 
+	`´št
+(
+b
+.
+	$a¡y³
+())
+
+15 
+	`´št
+(
+b
+.
+	$a¡y³
+())
+
+17 
+c
+ = 
+Å
+.
+	$dty³
+()
+
+18 
+	`´št
+(
+Å
+.
+	$issubdty³
+(
+c
+, 
+Å
+.
+æßtšg
+))
+
+19 
+c
+ = 
+Å
+.
+	$dty³
+()
+
+20 
+	`´št
+(
+Å
+.
+	$issubdty³
+(
+c
+, 
+Å
+.
+æßtšg
+))
+
+23 
+d
+ = 
+Å
+.
+	`¬¿y
+([[1, 2], [3, 4], (1+1
+j
+, 3)])
+
+24 
+	$´št
+(
+d
+)
+
+26 
+e
+ = 
+Å
+.
+	`z”os
+((2, 3))
+
+27 
+	$´št
+(
+e
+)
+
+29 
+f
+ = 
+Å
+.
+	$lš¥aû
+(1., 4, 6)
+
+30 
+	`´št
+(
+f
+)
+
+	@python_ch2.py
+
+1 
+impÜt
+ 
+sys
+
+
+3 
+	$´št
+(
+sys
+.
+¬gv
+[0])
+
+4 
+	`´št
+(
+sys
+.
+¬gv
+[1])
+
+	@
+1
+.
+0
+6
+55
+ex1.py
+ex2.py
+ex3.py
+ex4.py
+numpy_ex3.py
+python_ch2.py

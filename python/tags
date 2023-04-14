@@ -1,0 +1,23 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+a	numpy_ex3.py	/^a = np.array([1, 2, 3], dtype='float')$/;"	v
+average_passengers_per_car	ex4.py	/^average_passengers_per_car = passengers \/ cars_driven$/;"	v
+b	numpy_ex3.py	/^b = np.array([1.2, 2.4, 3.6])$/;"	v
+c	numpy_ex3.py	/^c = np.dtype(float)$/;"	v
+c	numpy_ex3.py	/^c = np.dtype(int)$/;"	v
+carpool_capacity	ex4.py	/^carpool_capacity = cars_driven * space_in_a_car$/;"	v
+cars	ex4.py	/^cars = 100$/;"	v
+cars_driven	ex4.py	/^cars_driven = drivers$/;"	v
+cars_not_driven	ex4.py	/^cars_not_driven = drivers$/;"	v
+d	numpy_ex3.py	/^d = np.array([[1, 2], [3, 4], (1+1j, 3)])$/;"	v
+drivers	ex4.py	/^drivers = 30$/;"	v
+e	numpy_ex3.py	/^e = np.zeros((2, 3))$/;"	v
+f	numpy_ex3.py	/^f = np.linspace(1., 4, 6)$/;"	v
+np	numpy_ex3.py	/^import numpy as np$/;"	i
+passengers	ex4.py	/^passengers = 90$/;"	v
+space_in_a_car	ex4.py	/^space_in_a_car = 4.0$/;"	v
+sys	python_ch2.py	/^import sys$/;"	i
