@@ -1,0 +1,2 @@
+rm intersection a.out 
+

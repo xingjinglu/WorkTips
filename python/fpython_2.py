@@ -1,5 +1,9 @@
 
 from collections import namedtuple
+from array import array
+from random import random
+
+
 
 # fluent python ch2.
 #
@@ -64,7 +68,39 @@ def test():
     fruits.sort()
     print("fruits: ", fruits)
 
+    # array
 
+    floats = array('d',(random() for i in range(10**7)))
+    print(floats[-1])
+    fp = open("floats.bin", "wb")
+    floats.tofile(fp)
+    fp.close
+
+    floats2 = array('d')
+    fp  = open("floats.bin", 'rb')
+    floats2.fromfile(fp, 10**7)
+    print(floats2[-1])
+
+    # memoryview
+    test = array('h', [10, 20, 30, 25, 15])
+    memv = memoryview(test)
+    print(len(test))
+    print(test[1])
+    test_list = memv.tolist()
+    print(test_list)
+    print(array)
+
+    from collections import deque
+    dq = deque(range(10), maxlen = 10)
+    print(dq)
+    dq.rotate(3)
+    print(dq)
+    dq.appendleft(12)
+    print(dq)
+    x = dq.popleft()
+    print(x)
+    print(dq)
+    
 
 if __name__ == "__main__":
     test()
