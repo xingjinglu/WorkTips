@@ -106,13 +106,29 @@ int main() {
 
 
   // 
-  test_file_size();
+  //test_file_size();
 
-  // 
-  int *m_ptr = static_cast<int*>(MmapAllocAlign(128));
-  std::cout<<"m_ptr = " << m_ptr << std::endl;
-  for(int i = 0; i < 2; i++)
-    m_ptr[i] = i + 2;
-  MmapFree(m_ptr);
+  //
+  int fd = open("example.txt", O_RDWR);
+  MmapStorage<int> m1;
+  int size = 1024000000;
+  m1.alloc(size, fd);
+  int *mptr = m1.get();
+  std::cout<<"m_ptr = " << mptr << std::endl;
+  for(int i = 0; i < size; i++)
+    mptr[i] = i + 2;
+  //MmapFree(m_ptr);
+
+
+  int fd2 = open("example2.txt", O_RDWR);
+  MmapStorage<int> m2;
+  m2.alloc(size, fd);
+  int *mptr2 = m2.get();
+  std::cout<<"m_ptr2 = " << mptr2 << std::endl;
+  for(int i = 0; i < size; i++)
+    mptr2[i] = i + 2;
+  //MmapFree(m_ptr);
+
   return 0;
 }
+

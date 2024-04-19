@@ -29,6 +29,22 @@ class MmapStorage{
     }
 
     // size: number of element.
+    int alloc(int size, int fd)
+    {
+      ftruncate(fd, size * sizeof(T));
+      mData_ =static_cast<T*>(mmap(NULL, size * sizeof(T), PROT_WRITE|PROT_READ, 
+            MAP_SHARED, fd, 0));
+
+      if(mData_ == MAP_FAILED){
+        std::cerr<<"Failed to mmap" <<std::endl;
+        return -1;
+      }
+      mSize_ = size;
+
+      return 0;
+    }
+
+    // size: number of element.
     MmapStorage(int size)
     {
       mData_ =static_cast<T*>(mmap(NULL, size * sizeof(T), PROT_WRITE|PROT_READ, 
